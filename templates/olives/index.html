@@ -1,0 +1,23 @@
+{% extends 'olives/base.html' %} 
+{% load static %} 
+
+{% block title_block %}
+Home
+{% endblock %}
+
+{% block body_block %}
+<   <main class="page">
+        <section class="clean-block index dark">
+            <div class="container">
+                <div class="row justify-content-center">
+                	<img src="{% static "img/main-food/restaurant1.jpg" %}" class="img-fluid" alt="Responsive image">
+                </div>
+                <div class="text centered mt-5">
+                <h3 class="display-4">Olives and Pesto</h3>
+                <p class="font-weight-light">The finest in Mexitalian dining.</p> 
+            	</div>
+            </div>
+        </section>
+    </main>
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends 'olives/base.html' %}
+
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block %}
+<main class="page contact-us-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text">Login</h2>
+
+                {% if form.errors %}
+                    <p>Your username and password didn't match. Please try again.</p>
+                {% endif %}
+
+                {% if next %}
+                    {% if user.is_authenticated %}
+                        <p>Your please login with an account that has access.</p>aar
+                    {% else %}
+                        <p>Please login to see this page.</p>
+                    {% endif %}
+                {% endif %}
+            <p id = "message"></p>
+            </div>
+
+            <form class="form" method="post" action ".">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>{{ form.username.label_tag }}</label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label>{{ form.password.label_tag }}</label>
+                    {{ form.password }}
+                </div>
+                <input class="btn btn-outline-light btn-lg btn-form center" type="submit" value="Log In" />
+                <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+        </div>
+        </div>
+    </section>
+</main>
+         <script>
+        alert("You need to log in to enter certain webpages. ");
+      </script>
+{% endblock %}

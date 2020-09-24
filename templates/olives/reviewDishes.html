@@ -1,0 +1,53 @@
+{% extends 'olives/base.html' %}
+# Only LOGGED IN can access
+{% block title_block %}        
+    Dish Review Page
+{% endblock %}
+        
+{% block body_block %}
+<main class="page contact-us-page" xmlns="http://www.w3.org/1999/html">
+    <section class="clean-block dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text">Review Dishes</h2>
+            </div>
+
+            <h3 class="text-center">{{ boldmessage }}</h3>
+            {% if TopDishes %}
+                {% for dish in TopDishes %}
+                    <p class="text-center">{{ dish.name }}<strong> Likes: </strong>{{ dish.likes }}</p>
+                {% endfor %}
+            {% else %}
+                <p class="text-center"><strong>There are no dishes present!</strong></p><br>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <h3 class="text-center">Dishes to Review</h3>
+            {% if AllDishes %}
+                {% for dish in AllDishes %}
+                <p class="text-center">
+                    {{ dish.name }}: <Strong id="like_count">{{ dish.likes }}</Strong> likes
+                    <form action="{% url "olives:dishReview" %}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="dish-id" value={{ dish.id }}>
+                        {% if not user.is_staff %}
+                            <button class="btn btn-outline-light btn-sm btn-form" type="submit">Add Like</button>
+                        {% endif %}
+                    </form>
+                    <br>
+                </p>
+                {% endfor %}
+                {% if user.is_staff %}
+                    <p class="text-center">Only Customers are allowed to rate dishes.</p>
+                {% endif %} 
+            {% else %}
+                <p class="text-center"><strong>There are no dish present.</strong></p>
+            {% endif %}
+            
+
+            <a href="{% url "olives:add_dish" %}"> <button class="btn btn-outline-light btn-lg btn-form center">Add a dish!</button> </a>
+            <a href="{% url "olives:delete_dish" %}"> <button class="btn btn-outline-light btn-lg btn-form center">Delete a dish!</button> </a>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endblock %}
